@@ -131,7 +131,8 @@ static bool use_bufsize_modified(obs_properties_t *ppts, obs_property_t *p,
 {
 	bool use_bufsize = obs_data_get_bool(settings, "use_bufsize");
 
-	//set "buffer_size" UI (value field) to visible if "use_bufsize" is checked/enabled
+	//set "buffer_size" UI (value field) to   visible if "use_bufsize" is    checked/enabled
+	//set "buffer_size" UI (value field) to invisible if "use_bufsize" is unchecked/disabled
 	p = obs_properties_get(ppts, "buffer_size");
 	obs_property_set_visible(p, use_bufsize);
 	return true;
