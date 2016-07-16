@@ -145,7 +145,8 @@ static bool rate_control_modified(obs_properties_t *ppts, obs_property_t *p,
 	bool abr = astrcmpi(rc, "CBR") == 0 || astrcmpi(rc, "ABR") == 0;
 	bool rc_crf = astrcmpi(rc, "CRF") == 0;
 	
-	//hide CRF UI (input value field) if CBR or ABR mode selected
+	//hide   CRF UI (input value field) if CBR or ABR mode     selected
+	//unhide CRF UI (input value field) if CBR or ABR mode not selected
 	p = obs_properties_get(ppts, "crf");
 	obs_property_set_visible(p, !abr);
 	
