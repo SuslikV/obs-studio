@@ -144,6 +144,7 @@ static bool rate_control_modified(obs_properties_t *ppts, obs_property_t *p,
 	const char *rc = obs_data_get_string(settings, "rate_control");
 	bool abr = astrcmpi(rc, "CBR") == 0 || astrcmpi(rc, "ABR") == 0;
 	bool rc_crf = astrcmpi(rc, "CRF") == 0;
+	bool use_bufsize = obs_data_get_bool(settings, "use_bufsize");
 	
 	//hide   CRF UI (input value field) if CBR or ABR mode     selected
 	//unhide CRF UI (input value field) if CBR or ABR mode not selected
@@ -156,7 +157,7 @@ static bool rate_control_modified(obs_properties_t *ppts, obs_property_t *p,
 	p = obs_properties_get(ppts, "use_bufsize");
 	obs_property_set_visible(p, !rc_crf);
 	p = obs_properties_get(ppts, "buffer_size");
-	obs_property_set_visible(p, !rc_crf);
+	obs_property_set_visible(p, !rc_crf && use_bufsize);
 	return true;
 }
 
