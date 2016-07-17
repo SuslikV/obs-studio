@@ -129,12 +129,14 @@ static inline void add_strings(obs_property_t *list, const char *const *strings)
 static bool use_bufsize_modified(obs_properties_t *ppts, obs_property_t *p,
 		obs_data_t *settings)
 {
+	const char *rc = obs_data_get_string(settings, "rate_control");
+	bool rc_crf = astrcmpi(rc, "CRF") == 0;
 	bool use_bufsize = obs_data_get_bool(settings, "use_bufsize");
 
-	//set "buffer_size" UI (value field) to   visible if "use_bufsize" is    checked/enabled
-	//set "buffer_size" UI (value field) to invisible if "use_bufsize" is unchecked/disabled
+	//set "buffer_size" UI (value field) to visible if "use_bufsize" is enabled
+	//when building UI at obs_properties_t, rate_control_modified called first, then called use_bufsize_modified, thus hidden element may apppear again
 	p = obs_properties_get(ppts, "buffer_size");
-	obs_property_set_visible(p, use_bufsize);
+	obs_property_set_visible(p, !crf && use_bufsize);
 	return true;
 }
 
@@ -146,8 +148,8 @@ static bool rate_control_modified(obs_properties_t *ppts, obs_property_t *p,
 	bool rc_crf = astrcmpi(rc, "CRF") == 0;
 	bool use_bufsize = obs_data_get_bool(settings, "use_bufsize");
 	
-	//hide   CRF UI (input value field) if CBR or ABR mode     selected
-	//unhide CRF UI (input value field) if CBR or ABR mode not selected
+	//hide CRF-input-value UI if CBR or ABR mode selected
+	//unhide CRF-input-value UI if CBR or ABR mode not selected
 	p = obs_properties_get(ppts, "crf");
 	obs_property_set_visible(p, !abr);
 	
@@ -157,7 +159,7 @@ static bool rate_control_modified(obs_properties_t *ppts, obs_property_t *p,
 	p = obs_properties_get(ppts, "use_bufsize");
 	obs_property_set_visible(p, !rc_crf);
 	p = obs_properties_get(ppts, "buffer_size");
-	obs_property_set_visible(p, !rc_crf && use_bufsize);
+	obs_property_set_visible(p, !rc_crf && use_bufsize); // && never show "buffer_size" UI if "use_bufsize" disabled
 	return true;
 }
 
