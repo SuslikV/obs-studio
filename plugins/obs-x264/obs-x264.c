@@ -134,7 +134,8 @@ static bool use_bufsize_modified(obs_properties_t *ppts, obs_property_t *p,
 	bool use_bufsize = obs_data_get_bool(settings, "use_bufsize");
 
 	//set "buffer_size" UI (value field) to visible if "use_bufsize" is enabled
-	//when building UI at obs_properties_t, rate_control_modified called first, then called use_bufsize_modified, thus hidden element may apppear again
+	//When building UI at obs_properties_t, rate_control_modified called first, 
+	//then called use_bufsize_modified, thus hidden element may apppear again
 	p = obs_properties_get(ppts, "buffer_size");
 	obs_property_set_visible(p, !rc_crf && use_bufsize);
 	return true;
