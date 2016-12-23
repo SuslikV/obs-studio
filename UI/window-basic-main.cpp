@@ -2703,6 +2703,28 @@ void OBSBasic::CloseDialogs()
 	}
 }
 
+void OBSBasic::EnumDialogs()
+{
+	list_of_VisibleDialogs.clear();
+	list_of_ModalDialogs.clear();
+	//fill list of Visible dialogs and Modal dialogs
+	QList<QDialog*> allDialogs = this->findChildren<QDialog*>();
+	foreach(QDialog* cur_dialog, allDialogs) {
+		if (cur_dialog->isVisible())
+			list_of_VisibleDialogs.append(cur_dialog);
+		if (cur_dialog->isModal())
+			list_of_ModalDialogs.append(cur_dialog);
+	}
+
+	list_of_VisibleMBoxes.clear();
+	//fill list of Visible message boxes
+	QList<QMessageBox*> allMessageBoxes = this->findChildren<QMessageBox*>();
+	foreach(QMessageBox* cur_MBox, allMessageBoxes) {
+		if (cur_MBox->isVisible())
+			list_of_VisibleMBoxes.append(cur_MBox);
+	}
+}
+
 void OBSBasic::ClearSceneData()
 {
 	disableSaving++;
@@ -4886,10 +4908,19 @@ void OBSBasic::on_actionScaleOutput_triggered()
 
 void OBSBasic::SetShowing(bool showing)
 {
+	//hide
 	if (!showing && isVisible()) {
 		config_set_string(App()->GlobalConfig(),
 			"BasicWindow", "geometry",
 			saveGeometry().toBase64().constData());
+		
+		//hide all visible child dialogs
+		if (!list_of_VisibleDialogs.isEmpty()) {
+			foreach(QDialog* cur_dialog, list_of_VisibleDialogs) {
+				cur_dialog->hide();
+			}
+		}
+
 
 		if (showHide)
 			showHide->setText(QTStr("Basic.SystemTray.Show"));
@@ -4900,6 +4931,7 @@ void OBSBasic::SetShowing(bool showing)
 
 		setVisible(false);
 
+	//show
 	} else if (showing && !isVisible()) {
 		
 		//If the window is not visible(i.e. isVisible() returns false),
@@ -4917,7 +4949,27 @@ void OBSBasic::SetShowing(bool showing)
 			EnablePreviewDisplay(true);
 
 		setVisible(true);
+		
+		//show all child dialogs that was visible earlier
+		if (!list_of_VisibleDialogs.isEmpty()) {
+			foreach(QDialog* cur_dialog, list_of_VisibleDialogs) {
+				cur_dialog->show();
+			}
+		}
 	}
+}
+
+void OBSBasic::ToggleShowHide()
+{
+	bool showing = isVisible();
+	if (showing) {
+		//make check for modal dialogs
+		EnumDialogs();
+		if (!list_of_ModalDialogs.isEmpty() ||
+			!list_of_VisibleMBoxes.isEmpty())
+				return;
+	}
+	SetShowing(!showing);
 }
 
 void OBSBasic::SystemTrayInit()
@@ -5014,3 +5066,10 @@ void OBSBasic::SystemTray(bool firstStarted)
 	else
 		showHide->setText(QTStr("Basic.SystemTray.Show"));
 }
+
+bool OBSBasic::sysTrayMinimizeToTray()
+{
+	return config_get_bool(GetGlobalConfig(),
+		"BasicWindow", "SysTrayMinimizeToTray");
+}
+
