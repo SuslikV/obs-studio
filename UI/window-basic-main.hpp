@@ -329,6 +329,8 @@ private:
 	QList<QDialog*> list_of_ModalDialogs;
 	QList<QMessageBox*> list_of_VisibleMBoxes; //always modal
 
+	QList<QPoint> VisibleDialogsPos;
+
 public slots:
 	void StartStreaming();
 	void StopStreaming();
