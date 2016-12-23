@@ -2703,6 +2703,28 @@ void OBSBasic::CloseDialogs()
 	}
 }
 
+void OBSBasic::EnumDialogs()
+{
+	list_of_VisibleDialogs.clear();
+	list_of_ModalDialogs.clear();
+	//fill list of Visible dialogs and Modal dialogs
+	QList<QDialog*> allDialogs = this->findChildren<QDialog*>();
+	foreach(QDialog* cur_dialog, allDialogs) {
+		if (cur_dialog->isVisible())
+			list_of_VisibleDialogs.append(cur_dialog);
+		if (cur_dialog->isModal())
+			list_of_ModalDialogs.append(cur_dialog);
+	}
+
+	list_of_VisibleMBoxes.clear();
+	//fill list of Visible message boxes
+	QList<QMessageBox*> allMessageBoxes = this->findChildren<QMessageBox*>();
+	foreach(QMessageBox* cur_MBox, allMessageBoxes) {
+		if (cur_MBox->isVisible())
+			list_of_VisibleMBoxes.append(cur_MBox);
+	}
+}
+
 void OBSBasic::ClearSceneData()
 {
 	disableSaving++;
