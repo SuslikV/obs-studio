@@ -5066,3 +5066,10 @@ void OBSBasic::SystemTray(bool firstStarted)
 	else
 		showHide->setText(QTStr("Basic.SystemTray.Show"));
 }
+
+bool OBSBasic::sysTrayMinimizeToTray()
+{
+	return config_get_bool(GetGlobalConfig(),
+		"BasicWindow", "SysTrayMinimizeToTray");
+}
+
