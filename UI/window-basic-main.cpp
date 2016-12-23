@@ -4908,10 +4908,19 @@ void OBSBasic::on_actionScaleOutput_triggered()
 
 void OBSBasic::SetShowing(bool showing)
 {
+	//hide
 	if (!showing && isVisible()) {
 		config_set_string(App()->GlobalConfig(),
 			"BasicWindow", "geometry",
 			saveGeometry().toBase64().constData());
+		
+		//hide all visible child dialogs
+		if (!list_of_VisibleDialogs.isEmpty()) {
+			foreach(QDialog* cur_dialog, list_of_VisibleDialogs) {
+				cur_dialog->hide();
+			}
+		}
+
 
 		if (showHide)
 			showHide->setText(QTStr("Basic.SystemTray.Show"));
@@ -4922,6 +4931,7 @@ void OBSBasic::SetShowing(bool showing)
 
 		setVisible(false);
 
+	//show
 	} else if (showing && !isVisible()) {
 		
 		//If the window is not visible(i.e. isVisible() returns false),
@@ -4939,7 +4949,27 @@ void OBSBasic::SetShowing(bool showing)
 			EnablePreviewDisplay(true);
 
 		setVisible(true);
+		
+		//show all child dialogs that was visible earlier
+		if (!list_of_VisibleDialogs.isEmpty()) {
+			foreach(QDialog* cur_dialog, list_of_VisibleDialogs) {
+				cur_dialog->show();
+			}
+		}
 	}
+}
+
+void OBSBasic::ToggleShowHide()
+{
+	bool showing = isVisible();
+	if (showing) {
+		//make check for modal dialogs
+		EnumDialogs();
+		if (!list_of_ModalDialogs.isEmpty() ||
+			!list_of_VisibleMBoxes.isEmpty())
+				return;
+	}
+	SetShowing(!showing);
 }
 
 void OBSBasic::SystemTrayInit()
