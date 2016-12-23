@@ -38,6 +38,8 @@
 
 #include <QPointer>
 
+#include <QMessageBox>
+
 class QListWidgetItem;
 class VolControl;
 class QNetworkReply;
@@ -326,6 +328,10 @@ private:
 		return config_get_bool(GetGlobalConfig(),
 			"BasicWindow", "SysTrayMinimizeToTray");
 	}
+	
+	QList<QDialog*> list_of_VisibleDialogs;
+	QList<QDialog*> list_of_ModalDialogs;
+	QList<QMessageBox*> list_of_VisibleMBoxes; //always modal
 
 public slots:
 	void StartStreaming();
