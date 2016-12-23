@@ -323,11 +323,7 @@ private:
 
 	void ReplayBufferClicked();
 	
-	inline bool sysTrayMinimizeToTray() const
-	{
-		return config_get_bool(GetGlobalConfig(),
-			"BasicWindow", "SysTrayMinimizeToTray");
-	}
+	bool sysTrayMinimizeToTray();
 	
 	QList<QDialog*> list_of_VisibleDialogs;
 	QList<QDialog*> list_of_ModalDialogs;
@@ -403,15 +399,7 @@ private slots:
 	void IconActivated(QSystemTrayIcon::ActivationReason reason);
 	void SetShowing(bool showing);
 
-	inline void ToggleShowHide()
-	{
-		bool showing = isVisible();
-		if (disableHiding && showing)
-			return;
-		if (showing)
-			CloseDialogs();
-		SetShowing(!showing);
-	}
+	void ToggleShowHide();
 
 private:
 	/* OBS Callbacks */
