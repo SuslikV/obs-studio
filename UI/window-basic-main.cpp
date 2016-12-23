@@ -4915,9 +4915,18 @@ void OBSBasic::SetShowing(bool showing)
 			saveGeometry().toBase64().constData());
 		
 		//hide all visible child dialogs
+		VisibleDialogsPos.clear();
 		if (!list_of_VisibleDialogs.isEmpty()) {
-			foreach(QDialog* cur_dialog, list_of_VisibleDialogs) {
-				cur_dialog->hide();
+			for (int i = 0; i < list_of_VisibleDialogs.size(); ++i) {
+				/*
+				//remember size and pos of all visible children dialogs
+				QSize dlg_size = list_of_VisibleDialogs.at(i)->size();
+				VisibleDialogsSizes.append(dlg_size);
+				*/
+				QPoint dlg_pos = list_of_VisibleDialogs.at(i)->pos();
+				VisibleDialogsPos.append(dlg_pos);
+
+				list_of_VisibleDialogs.at(i)->hide();
 			}
 		}
 
@@ -4936,7 +4945,7 @@ void OBSBasic::SetShowing(bool showing)
 		
 		//If the window is not visible(i.e. isVisible() returns false),
 		//the window state will take effect when show() is called.
-		//Unminimize window if was hidden to tray instead of task bar.
+		//Unminimize window if it was hidden to tray instead of task bar.
 		if (sysTrayMinimizeToTray())
 			this->setWindowState((this->windowState() & ~Qt::WindowMinimized) | 
 				Qt::WindowActive);
@@ -4952,8 +4961,16 @@ void OBSBasic::SetShowing(bool showing)
 		
 		//show all child dialogs that was visible earlier
 		if (!list_of_VisibleDialogs.isEmpty()) {
-			foreach(QDialog* cur_dialog, list_of_VisibleDialogs) {
-				cur_dialog->show();
+			for (int i = 0; i < list_of_VisibleDialogs.size(); ++i) {
+				/*
+				//restore size and pos of all visible children dialogs
+				QSize dlg_size = VisibleDialogsSizes.at(i);
+				list_of_VisibleDialogs.at(i)->resize(dlg_size);
+				*/
+				QPoint dlg_pos = VisibleDialogsPos.at(i);
+				list_of_VisibleDialogs.at(i)->move(dlg_pos);
+				
+				list_of_VisibleDialogs.at(i)->show();
 			}
 		}
 	}
