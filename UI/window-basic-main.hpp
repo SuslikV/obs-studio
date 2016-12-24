@@ -321,11 +321,11 @@ private:
 	void dropEvent(QDropEvent *event) override;
 
 	void ReplayBufferClicked();
-	
+
 	bool sysTrayMinimizeToTray();
-	
+
 	void EnumDialogs();
-  
+
 	QList<QDialog*> list_of_VisibleDialogs;
 	QList<QDialog*> list_of_ModalDialogs;
 	QList<QMessageBox*> list_of_VisibleMBoxes; //always modal
