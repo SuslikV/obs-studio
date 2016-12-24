@@ -164,7 +164,6 @@ private:
 	QPointer<QAction>         showHide;
 	QPointer<QAction>         exit;
 	QPointer<QMenu>           trayMenu;
-	bool          disableHiding = false;
 
 	void          DrawBackdrop(float cx, float cy);
 
@@ -325,6 +324,16 @@ private:
 	
 	bool sysTrayMinimizeToTray();
 	
+	QList<QDialog*> list_of_VisibleDialogs;
+	QList<QDialog*> list_of_ModalDialogs;
+	QList<QMessageBox*> list_of_VisibleMBoxes; //always modal
+
+	QList<QPoint> VisibleDialogsPos;
+
+	bool sysTrayMinimizeToTray();
+
+	void EnumDialogs();
+
 	QList<QDialog*> list_of_VisibleDialogs;
 	QList<QDialog*> list_of_ModalDialogs;
 	QList<QMessageBox*> list_of_VisibleMBoxes; //always modal

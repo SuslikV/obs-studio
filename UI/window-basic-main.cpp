@@ -2837,11 +2837,9 @@ void OBSBasic::on_actionRemux_triggered()
 
 void OBSBasic::on_action_Settings_triggered()
 {
-	disableHiding = true;
 	OBSBasicSettings settings(this);
 	settings.exec();
 	SystemTray(false);
-	disableHiding = false;
 }
 
 void OBSBasic::on_actionAdvAudioProperties_triggered()
@@ -4943,13 +4941,6 @@ void OBSBasic::SetShowing(bool showing)
 	//show
 	} else if (showing && !isVisible()) {
 		
-		//If the window is not visible(i.e. isVisible() returns false),
-		//the window state will take effect when show() is called.
-		//Unminimize window if it was hidden to tray instead of task bar.
-		if (sysTrayMinimizeToTray())
-			this->setWindowState((this->windowState() & ~Qt::WindowMinimized) | 
-				Qt::WindowActive);
-		
 		if (showHide)
 			showHide->setText(QTStr("Basic.SystemTray.Hide"));
 		QTimer::singleShot(250, this, SLOT(show()));
@@ -4973,6 +4964,10 @@ void OBSBasic::SetShowing(bool showing)
 				list_of_VisibleDialogs.at(i)->show();
 			}
 		}
+		//Unminimize window if it was hidden to tray instead of task bar.
+		if (sysTrayMinimizeToTray())
+			this->setWindowState((this->windowState() & ~Qt::WindowMinimized) | 
+				Qt::WindowActive);
 	}
 }
 
