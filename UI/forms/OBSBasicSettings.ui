@@ -4204,6 +4204,6 @@
    <signal>toggled(bool)</signal>
    <receiver>systemTrayMinimizeToTray</receiver>
    <slot>setEnabled(bool)</slot>
-  </connection> 
+  </connection>
  </connections>
 </ui>
