@@ -164,7 +164,6 @@ private:
 	QPointer<QAction>         showHide;
 	QPointer<QAction>         exit;
 	QPointer<QMenu>           trayMenu;
-	bool          disableHiding = false;
 
 	void          DrawBackdrop(float cx, float cy);
 
