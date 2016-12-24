@@ -2837,11 +2837,9 @@ void OBSBasic::on_actionRemux_triggered()
 
 void OBSBasic::on_action_Settings_triggered()
 {
-	disableHiding = true;
 	OBSBasicSettings settings(this);
 	settings.exec();
 	SystemTray(false);
-	disableHiding = false;
 }
 
 void OBSBasic::on_actionAdvAudioProperties_triggered()
