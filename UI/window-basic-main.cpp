@@ -3870,9 +3870,7 @@ void OBSBasic::StartStreaming()
 	if (!outputHandler->StartStreaming(service)) {
 		ui->streamButton->setText(QTStr("Basic.Main.StartStreaming"));
 		ui->streamButton->setEnabled(true);
-		//use themeID="startStreaming" property to customize button style
 		ui->streamButton->setProperty("themeID", "startStreaming");
-		//update style cache by forcing setStyleSheet() with comment string inside
 		ui->streamButton->setStyleSheet("/**/");
 
 		if (sysTrayStream) {
@@ -3994,9 +3992,7 @@ void OBSBasic::StreamDelayStarting(int sec)
 {
 	ui->streamButton->setText(QTStr("Basic.Main.StopStreaming"));
 	ui->streamButton->setEnabled(true);
-	//use themeID="stopStreaming" property to customize button style
 	ui->streamButton->setProperty("themeID", "stopStreaming");
-	//update style cache by forcing setStyleSheet() with comment string inside
 	ui->streamButton->setStyleSheet("/**/");
 
 	if (sysTrayStream) {
@@ -4023,9 +4019,7 @@ void OBSBasic::StreamDelayStopping(int sec)
 {
 	ui->streamButton->setText(QTStr("Basic.Main.StartStreaming"));
 	ui->streamButton->setEnabled(true);
-	//use themeID="startStreaming" property to customize button style
 	ui->streamButton->setProperty("themeID", "startStreaming");
-	//update style cache by forcing setStyleSheet() with comment string inside
 	ui->streamButton->setStyleSheet("/**/");
 
 	if (sysTrayStream) {
@@ -4050,9 +4044,7 @@ void OBSBasic::StreamingStart()
 {
 	ui->streamButton->setText(QTStr("Basic.Main.StopStreaming"));
 	ui->streamButton->setEnabled(true);
-	//use themeID="stopStreaming" property to customize button style
 	ui->streamButton->setProperty("themeID", "stopStreaming");
-	//update style cache by forcing setStyleSheet() with comment string inside
 	ui->streamButton->setStyleSheet("/**/");
 	ui->statusbar->StreamStarted(outputHandler->streamOutput);
 
@@ -4072,9 +4064,7 @@ void OBSBasic::StreamingStart()
 void OBSBasic::StreamStopping()
 {
 	ui->streamButton->setText(QTStr("Basic.Main.StoppingStreaming"));
-	//use themeID="stoppingStreaming" property to customize button style
 	ui->streamButton->setProperty("themeID", "stoppingStreaming");
-	//update style cache by forcing setStyleSheet() with comment string inside
 	ui->streamButton->setStyleSheet("/**/");
 
 	if (sysTrayStream)
@@ -4117,9 +4107,7 @@ void OBSBasic::StreamingStop(int code)
 
 	ui->streamButton->setText(QTStr("Basic.Main.StartStreaming"));
 	ui->streamButton->setEnabled(true);
-	//use themeID="startStreaming" property to customize button style
 	ui->streamButton->setProperty("themeID", "startStreaming");
-	//update style cache by forcing setStyleSheet() with comment string inside
 	ui->streamButton->setStyleSheet("/**/");
 
 	if (sysTrayStream) {
@@ -4167,14 +4155,6 @@ void OBSBasic::RecordStopping()
 	ui->recordButton->setText(QTStr("Basic.Main.StoppingRecording"));
 	//use themeID="stoppingRecording" property to customize button style
 	ui->recordButton->setProperty("themeID", "stoppingRecording");
-	//
-	//Maybe polish()/unpolish() will be used later to override some style implementations,
-	//so do not call it here directly.
-	//Probably, new implementation of unpolish() should revert any style changes to default.
-	//This will allow to add new elements with default style when old theme loads (custom theme).
-	//Thus new elements unknown to old custom theme don't inherit any new style and just uses default style.
-	//Without unpolish() override, the application restart required to load defaults to new elements.
-	//
 	//update style cache by forcing setStyleSheet() with comment string inside
 	ui->recordButton->setStyleSheet("/**/");
 
@@ -4200,9 +4180,7 @@ void OBSBasic::RecordingStart()
 {
 	ui->statusbar->RecordingStarted(outputHandler->fileOutput);
 	ui->recordButton->setText(QTStr("Basic.Main.StopRecording"));
-	//use themeID="stopRecording" property to customize button style
 	ui->recordButton->setProperty("themeID", "stopRecording");
-	//update style cache by forcing setStyleSheet() with comment string inside
 	ui->recordButton->setStyleSheet("/**/");
 
 	if (sysTrayRecord)
@@ -4221,9 +4199,7 @@ void OBSBasic::RecordingStop(int code)
 {
 	ui->statusbar->RecordingStopped();
 	ui->recordButton->setText(QTStr("Basic.Main.StartRecording"));
-	//use themeID="startRecording" property to customize button style
 	ui->recordButton->setProperty("themeID", "startRecording");
-	//update style cache by forcing setStyleSheet() with comment string inside
 	ui->recordButton->setStyleSheet("/**/");
 
 	if (sysTrayRecord)
@@ -4303,9 +4279,7 @@ void OBSBasic::ReplayBufferStopping()
 		return;
 
 	replayBufferButton->setText(QTStr("Basic.Main.StoppingReplayBuffer"));
-	//use themeID="stoppingReplayBuffer" property to customize button style
 	replayBufferButton->setProperty("themeID", "stoppingReplayBuffer");
-	//update style cache by forcing setStyleSheet() with comment string inside
 	replayBufferButton->setStyleSheet("/**/");
 
 	if (sysTrayReplayBuffer)
@@ -4335,9 +4309,7 @@ void OBSBasic::ReplayBufferStart()
 		return;
 
 	replayBufferButton->setText(QTStr("Basic.Main.StopReplayBuffer"));
-	//use themeID="stopReplayBuffer" property to customize button style
 	replayBufferButton->setProperty("themeID", "stopReplayBuffer");
-	//update style cache by forcing setStyleSheet() with comment string inside
 	replayBufferButton->setStyleSheet("/**/");
 
 	if (sysTrayReplayBuffer)
@@ -4358,9 +4330,7 @@ void OBSBasic::ReplayBufferStop(int code)
 		return;
 
 	replayBufferButton->setText(QTStr("Basic.Main.StartReplayBuffer"));
-	//use themeID="startReplayBuffer" property to customize button style
 	replayBufferButton->setProperty("themeID", "startReplayBuffer");
-	//update style cache by forcing setStyleSheet() with comment string inside
 	replayBufferButton->setStyleSheet("/**/");
 
 	if (sysTrayReplayBuffer)
