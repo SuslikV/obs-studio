@@ -35,6 +35,44 @@
     qproperty-icon: url(:/res/images/down.png);
 }
 
+/* QPushButtons */
+QPushButton#recordButton[themeID="startRecording"] {
+	qproperty-icon: url(); /*set no icon*/
+}
+
+QPushButton#recordButton[themeID="stoppingRecording"] {
+	qproperty-icon: url(); /*set no icon*/
+}
+
+QPushButton#recordButton[themeID="stopRecording"] {
+	qproperty-icon: url(:/res/images/stop.png);
+}
+
+QPushButton#streamButton[themeID="startStreaming"] {
+	qproperty-icon: url(); /*set no icon*/
+}
+
+QPushButton#streamButton[themeID="stoppingStreaming"] {
+	qproperty-icon: url(); /*set no icon*/
+}
+
+QPushButton#streamButton[themeID="stopStreaming"] {
+	qproperty-icon: url(:/res/images/stop.png);
+}
+
+/* replayBufferButton is pointer, apply instead to any widget with right themeID */
+* [themeID="startReplayBuffer"] {
+	qproperty-icon: url(); /*set no icon*/
+}
+
+* [themeID="stoppingReplayBuffer"] {
+	qproperty-icon: url(); /*set no icon*/
+}
+
+* [themeID="stopReplayBuffer"] {
+	qproperty-icon: url(:/res/images/stop.png);
+}
+
 MuteCheckBox {
     outline: none;
 }
