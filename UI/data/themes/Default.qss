@@ -35,6 +35,44 @@
     qproperty-icon: url(:/res/images/down.png);
 }
 
+/* QPushButtons */
+
+* [themeID="startRecording"]{
+	qproperty-icon: url(); /* set no icon */
+}
+
+* [themeID="stoppingRecording"]{
+	qproperty-icon: url(); /* set no icon */
+}
+
+* [themeID="stopRecording"]{
+	qproperty-icon: url(:/res/images/stop.png) normal;
+}
+
+* [themeID="startStreaming"]{
+	qproperty-icon: url(); /* set no icon */
+}
+
+* [themeID="stoppingStreaming"]{
+	qproperty-icon: url(); /* set no icon */
+}
+
+* [themeID="stopStreaming"]{
+	qproperty-icon: url(:/res/images/stop.png) normal;
+}
+
+* [themeID="startReplayBuffer"]{
+	qproperty-icon: url(); /* set no icon */
+}
+
+* [themeID="stoppingReplayBuffer"]{
+	qproperty-icon: url(); /* set no icon */
+}
+
+* [themeID="stopReplayBuffer"]{
+	qproperty-icon: url(:/res/images/stop.png) normal;
+}
+
 MuteCheckBox {
     outline: none;
 }
