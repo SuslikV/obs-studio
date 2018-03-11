@@ -1636,7 +1636,7 @@ bool AdvancedOutput::StartRecording()
 
 		string sf = GenerateSpecifiedFilename(recFormat, noSpace,
 				filenameFormat);
-		strPath += GenerateNumberedString(1, numRecOut, sf.c_str())
+		strPath += GenerateNumberedString(1, numRecOut, sf.c_str());
 		ensure_directory_exists(strPath);
 		if (!overwriteIfExists)
 			FindBestFilename(strPath, noSpace);
