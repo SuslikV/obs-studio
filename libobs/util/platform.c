@@ -26,6 +26,12 @@
 #include "utf8.h"
 #include "dstr.h"
 
+int32_t usrC = 0; //counter for the "%set" items in filenaming
+int32_t usrCR = 0; //counter for the "%set" items in filenaming replays
+
+//valid decimal padded formats
+char dfrmts[] = "%00d%01d%02d%03d%04d%05d%06d%07d%08d%09d";
+
 FILE *os_wfopen(const wchar_t *path, const char *mode)
 {
 	FILE *file = NULL;
