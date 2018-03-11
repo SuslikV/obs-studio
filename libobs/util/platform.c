@@ -794,7 +794,7 @@ char *os_numbered_string(const int32_t recType, int32_t number,
 	*/
 
 	//in case of unknown type - only first element of the "set" is valid
-	int32_t usrCounter = 1; //to manage "set" itterations
+	int32_t usrCounter = 1; //to manage "set" iterations
 
 	if (recType & 0x01)
 		usrCounter = ++usrC;
@@ -854,7 +854,6 @@ char *os_numbered_string(const int32_t recType, int32_t number,
 			size_t itemPos = 0; //item offset
 
 			//get item pointer and length according to index
-			//including empty items: "100,20abc0,,30,"
 			itemL = strcspn(usrSt.array, ",");
 			--itemIdx;
 			while (itemIdx) {
@@ -894,7 +893,6 @@ char *os_numbered_string(const int32_t recType, int32_t number,
 
 				if (strstr(dfrmts, chkFmt)) {
 					//"%0Xd..." - padded
-
 					char chrs[12] = {0}; //32bit+sign+null
 					snprintf(chrs, sizeof(chrs), chkFmt,
 							number);
@@ -907,12 +905,10 @@ char *os_numbered_string(const int32_t recType, int32_t number,
 
 			if ((frmtL > 1) && (pfrmt[1] == 'd')) {
 				//"%d..." - non-padded
-				char chrs[12] = {0}; //32bit + sign + null
+				char chrs[12] = {0}; //32bit+sign+null
 				snprintf(chrs, sizeof(chrs), "%d", number);
 
 				replace_text(&numf, frmtPos, 2, chrs);
-
-				//goto next_frmt;
 			}
 		}
 
