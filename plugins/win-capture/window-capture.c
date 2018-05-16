@@ -123,6 +123,16 @@ static void wc_defaults(obs_data_t *defaults)
 	obs_data_set_default_bool(defaults, "compatibility", false);
 }
 
+static bool use_cursor_callback(obs_properties_t *ppts, obs_property_t *p,
+		obs_data_t *settings)
+{
+	bool use_cursor = obs_data_get_bool(settings, "cursor");
+
+	p = obs_properties_get(ppts, "anicursor");
+	obs_property_set_enabled(p, use_cursor);
+	return true;
+}
+
 static obs_properties_t *wc_properties(void *unused)
 {
 	UNUSED_PARAMETER(unused);
@@ -140,8 +150,14 @@ static obs_properties_t *wc_properties(void *unused)
 	obs_property_list_add_int(p, TEXT_MATCH_CLASS, WINDOW_PRIORITY_CLASS);
 	obs_property_list_add_int(p, TEXT_MATCH_EXE,   WINDOW_PRIORITY_EXE);
 
-	obs_properties_add_bool(ppts, "cursor", TEXT_CAPTURE_CURSOR);
-	obs_properties_add_bool(ppts, "anicursor", TEXT_ANI_CURSOR);
+	p = obs_properties_add_bool(ppts, "cursor", TEXT_CAPTURE_CURSOR);
+
+	obs_property_set_modified_callback(p, use_cursor_callback);
+
+	p = obs_properties_add_bool(ppts, "anicursor", TEXT_ANI_CURSOR);
+	
+	obs_property_set_enabled(p, false);
+	
 	obs_properties_add_bool(ppts, "compatibility", TEXT_COMPATIBILITY);
 
 	return ppts;
