@@ -10,6 +10,7 @@
 #define TEXT_MATCH_CLASS    obs_module_text("WindowCapture.Priority.Class")
 #define TEXT_MATCH_EXE      obs_module_text("WindowCapture.Priority.Exe")
 #define TEXT_CAPTURE_CURSOR obs_module_text("CaptureCursor")
+#define TEXT_ANI_CURSOR     obs_module_text("AllowAniCursor")
 #define TEXT_COMPATIBILITY  obs_module_text("Compatibility")
 
 struct window_capture {
@@ -30,6 +31,8 @@ struct window_capture {
 
 	HWND                 window;
 	RECT                 last_rect;
+	
+	bool                 anicursor;
 };
 
 static void update_settings(struct window_capture *wc, obs_data_t *s)
@@ -53,6 +56,7 @@ static void update_settings(struct window_capture *wc, obs_data_t *s)
 
 	wc->priority      = (enum window_priority)priority;
 	wc->cursor        = obs_data_get_bool(s, "cursor");
+	wc->anicursor     = obs_data_get_bool(s, "anicursor");
 	wc->use_wildcards = obs_data_get_bool(s, "use_wildcards");
 	wc->compatibility = obs_data_get_bool(s, "compatibility");
 }
@@ -115,6 +119,7 @@ static uint32_t wc_height(void *data)
 static void wc_defaults(obs_data_t *defaults)
 {
 	obs_data_set_default_bool(defaults, "cursor", true);
+	obs_data_set_default_bool(defaults, "anicursor", false);
 	obs_data_set_default_bool(defaults, "compatibility", false);
 }
 
@@ -136,7 +141,7 @@ static obs_properties_t *wc_properties(void *unused)
 	obs_property_list_add_int(p, TEXT_MATCH_EXE,   WINDOW_PRIORITY_EXE);
 
 	obs_properties_add_bool(ppts, "cursor", TEXT_CAPTURE_CURSOR);
-
+	obs_properties_add_bool(ppts, "anicursor", TEXT_ANI_CURSOR);
 	obs_properties_add_bool(ppts, "compatibility", TEXT_COMPATIBILITY);
 
 	return ppts;
@@ -212,7 +217,7 @@ static void wc_tick(void *data, float seconds)
 		wc->last_rect = rect;
 		dc_capture_free(&wc->capture);
 		dc_capture_init(&wc->capture, 0, 0, rect.right, rect.bottom,
-				wc->cursor, wc->compatibility);
+				wc->cursor, wc->compatibility, wc->anicursor);
 	}
 
 	dc_capture_capture(&wc->capture, wc->window);
