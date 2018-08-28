@@ -196,6 +196,7 @@ static void wc_tick(void *data, float seconds)
 	GetClientRect(wc->window, &rect);
 
 	// get DPI for captured window
+	UINT wndDPI;
 	wndDPI = GetDForWnd(wc->window);
 
 	if (wndDPI) {
