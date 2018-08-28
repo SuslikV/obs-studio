@@ -195,6 +195,16 @@ static void wc_tick(void *data, float seconds)
 
 	GetClientRect(wc->window, &rect);
 
+	// get DPI for captured window
+	UINT wndDPI;
+	wndDPI = GetDForWnd(wc->window);
+
+	if (wndDPI) {
+		// physical pixel to a DIP
+		rect.bottom = (UINT) (rect.bottom * 96 / (float) wndDPI);
+		rect.right = (UINT) (rect.right * 96 / (float) wndDPI);
+	}
+
 	if (!reset_capture) {
 		wc->resize_timer += seconds;
 
