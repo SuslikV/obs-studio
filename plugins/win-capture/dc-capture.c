@@ -103,6 +103,16 @@ static void draw_cursor(struct dc_capture *capture, HDC hdc, HWND window)
 		pos.x = ci->ptScreenPos.x - (int)ii.xHotspot - win_pos.x;
 		pos.y = ci->ptScreenPos.y - (int)ii.yHotspot - win_pos.y;
 
+		// get DPI for captured window
+		UINT wndDPI;
+		wndDPI = GetDForWnd(window);
+
+		if (wndDPI) {
+			// physical pixel to a DIP
+			pos.x = (long) (pos.x * 96 / (float) wndDPI);
+			pos.y = (long) (pos.y * 96 / (float) wndDPI);
+		}
+
 		DrawIconEx(hdc, pos.x, pos.y, icon, 0, 0, 0, NULL,
 				DI_NORMAL);
 
