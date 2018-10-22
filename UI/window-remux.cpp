@@ -1018,8 +1018,10 @@ void RemuxWorker::remux(const QString &source, const QString &target)
 			QT_TO_UTF8(source),
 			QT_TO_UTF8(target))) {
 
+		int remuxOpt = 0;
+
 		success = media_remux_job_process(mr_job, callback,
-			this);
+				this, remuxOpt);
 
 		media_remux_job_destroy(mr_job);
 
