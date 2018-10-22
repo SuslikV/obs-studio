@@ -960,6 +960,25 @@ void OBSRemux::clearAll()
 	queueModel->clearAll();
 }
 
+void OBSRemux::muxOptChaged()
+{
+	int remuxOpt = ui->streamableOptions->currentIndex();
+
+	switch (remuxOpt) {
+	case 1:
+		ui->streamableOptions->setToolTip(QTStr(
+				"Remux.ToolTip.MP4withFastStart"));
+		break;
+	case 2:
+		ui->streamableOptions->setToolTip(QTStr(
+				"Remux.ToolTip.MP4selfcontainedFragmented"));
+		break;
+	default:
+		ui->streamableOptions->setToolTip(QTStr(""));
+		break;
+	}
+}
+
 /**********************************************************
   Worker thread - Executes the libobs remux operation as a
                   background process.
