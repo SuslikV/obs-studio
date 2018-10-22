@@ -699,6 +699,8 @@ OBSRemux::OBSRemux(const char *path, QWidget *parent, bool autoRemux_)
 			SIGNAL(clicked()), this, SLOT(clearAll()));
 	connect(ui->buttonBox->button(QDialogButtonBox::Close),
 			SIGNAL(clicked()), this, SLOT(close()));
+	connect(ui->streamableOptions, SIGNAL(currentIndexChanged(int)),
+			this, SLOT(muxOptChaged()));
 
 	worker->moveToThread(&remuxer);
 	remuxer.start();
