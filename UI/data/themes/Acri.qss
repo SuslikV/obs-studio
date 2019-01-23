@@ -884,5 +884,5 @@ FocusList::item {
 /* Preview background color */
 
 OBSQTDisplay {
-    qproperty-displayBackgroudColor: #28282A;
+	qproperty-displayBackgroundColor: #28282A;
 }
