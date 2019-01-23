@@ -8,7 +8,7 @@
 
 class OBSQTDisplay : public QWidget {
 	Q_OBJECT
-	Q_PROPERTY(QColor displayDisplayColor READ getDisplayGNDColor
+	Q_PROPERTY(QColor displayBackgroudColor READ getDisplayGNDColor
 			WRITE setDisplayGNDColor)
 
 	OBSDisplay display;
