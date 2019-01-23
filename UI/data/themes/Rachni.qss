@@ -1252,5 +1252,5 @@ QToolTip {
 /* Preview background color */
 
 OBSQTDisplay {
-    qproperty-displayDisplayColor: rgb(35, 38, 41);
+    qproperty-displayBackgroudColor: rgb(35, 38, 41);
 }
