@@ -53,8 +53,6 @@ OBSQTDisplay::OBSQTDisplay(QWidget *parent, Qt::WindowFlags flags)
 
 	connect(windowHandle(), &QWindow::visibleChanged, windowVisible);
 	connect(windowHandle(), &QWindow::screenChanged, sizeChanged);
-
-	this->setProperty("themeID", "displayBackgroundColor");
 }
 
 void OBSQTDisplay::SetDisplayBackgroundColor(const QColor &color)
