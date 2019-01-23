@@ -686,5 +686,5 @@ QLabel#errorLabel {
 /* Preview background color */
 
 OBSQTDisplay {
-    qproperty-displayBackgroudColor: rgb(76, 76, 76);
+	qproperty-displayBackgroundColor: rgb(76, 76, 76);
 }
