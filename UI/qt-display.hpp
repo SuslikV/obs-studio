@@ -35,8 +35,6 @@ public:
 	void setDisplayGNDColor(QColor color);
 	void updateDisplayGNDColor();
 
-	uint32_t displayGNDColor = GREY_COLOR_BACKGROUND;
-
 private:
 	QColor m_displayGNDColor;
 };
