@@ -726,5 +726,5 @@ QLabel#obsTrayIconDummy {
 }
 
 QLabel#obsTrayActiveIconDummy {
-    qproperty-pixmap: url(); /* Use default storage for Active icon */
+    qproperty-pixmap: url(./Dark/tray_active.png);
 }
