@@ -1287,9 +1287,9 @@ OBSBasicSettings {
 /* System Tray Icons */
 
 QLabel#obsTrayIconDummy {
-    qproperty-pixmap: url(); /* Use default storage for Normal icon */
+    qproperty-pixmap: url(./Rachni/obs.png);
 }
 
 QLabel#obsTrayActiveIconDummy {
-    qproperty-pixmap: url(); /* Use default storage for Active icon */
+    qproperty-pixmap: url(./Rachni/tray-active.png);
 }
