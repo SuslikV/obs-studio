@@ -74,7 +74,8 @@ OBSBasicStats::OBSBasicStats(QWidget *parent, bool closeable)
 	row = 0;
 
 	fps->setToolTip(QTStr("Basic.Stats.FPS.ToolTip"));
-	renderTime->setToolTip(QTStr("Basic.Stats.HDDSpaceAvailable.ToolTip"));
+	renderTime->setToolTip(QTStr(
+			"Basic.Stats.AverageTimeToRender.ToolTip"));
 	missedFrames->setToolTip(QTStr("Basic.Stats.MissedFrames.ToolTip"));
 	skippedFrames->setToolTip(QTStr("Basic.Stats.SkippedFrames.ToolTip"));
 
