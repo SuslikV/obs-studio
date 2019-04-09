@@ -14,14 +14,29 @@ class QCloseEvent;
 class OBSBasicStats : public QWidget {
 	Q_OBJECT
 
-	QLabel *fps = nullptr;
 	QLabel *cpuUsage = nullptr;
 	QLabel *hddSpace = nullptr;
 	QLabel *memUsage = nullptr;
 
+	QLabel *fps = nullptr;
 	QLabel *renderTime = nullptr;
-	QLabel *skippedFrames = nullptr;
 	QLabel *missedFrames = nullptr;
+	QLabel *skippedFrames = nullptr;
+
+	QLabel *cpuUsageTxt = nullptr;
+	QLabel *hddSpaceTxt = nullptr;
+	QLabel *memUsageTxt = nullptr;
+
+	QLabel *fpsTxt = nullptr;
+	QLabel *renderTimeTxt = nullptr;
+	QLabel *skippedFramesTxt = nullptr;
+	QLabel *missedFramesTxt = nullptr;
+
+	QLabel *nameTxt = nullptr;
+	QLabel *statusTxt = nullptr;
+	QLabel *droppedFramesTxt = nullptr;
+	QLabel *megabytesSentTxt = nullptr;
+	QLabel *bitrateTxt = nullptr;
 
 	QGridLayout *outputLayout = nullptr;
 
@@ -61,4 +76,18 @@ public:
 	static void InitializeValues();
 private:
 	QPointer<QObject> shortcutFilter;
+
+private slots:
+	void toggleCPU();
+	void toggleHDD();
+	void toggleMemory();
+	void toggleFPS();
+	void toggleRenderTime();
+	void toggleMissedFrames();
+	void toggleSkippedFrames();
+	void toggleName();
+	void toggleStatus();
+	void toggleDroppedFrames();
+	void toggleMegabytesSent();
+	void toggleBitrate();
 };
