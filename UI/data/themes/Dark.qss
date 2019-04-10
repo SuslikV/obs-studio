@@ -646,7 +646,26 @@ SourceTreeSubItemCheckBox::indicator:unchecked {
 }
 
 
+/* Tooltips */
+
+QToolTip {
+    font-weight: normal; /* reset from Stats header styling */
+}
+
+
 /* Label warning/error */
+
+QLabel {
+    font-weight: normal; /* reset error and warning styling */
+}
+
+QLabel[statsLabel="Header"] {
+    font-weight: bold;
+}
+
+QLabel[statsLabel="Status"] {
+    font-size: 10pt;
+}
 
 QLabel#warningLabel {
     color: rgb(192, 128, 0);
