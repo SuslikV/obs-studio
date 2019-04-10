@@ -97,4 +97,4 @@ private slots:
 
 void statsEntry(const char *LabelTxt, bool tip, const char *saveVar,
 		const char *property, QLabel *pLabel = nullptr,
-				QLabel *pVisibility = nullptr);
+		QLabel *pVisibility = nullptr);
