@@ -77,6 +77,9 @@ public:
 private:
 	QPointer<QObject> shortcutFilter;
 
+	void saveToggle(const char *saveVar, QLabel *pVis,
+			QLabel *label0 = nullptr, QLabel *label1 = nullptr);
+	
 private slots:
 	void toggleCPU();
 	void toggleHDD();
@@ -91,3 +94,7 @@ private slots:
 	void toggleMegabytesSent();
 	void toggleBitrate();
 };
+
+void statsEntry(const char *LabelTxt, bool tip, const char *saveVar,
+		const char *property, QLabel *pLabel = nullptr,
+				QLabel *pVisibility = nullptr);
